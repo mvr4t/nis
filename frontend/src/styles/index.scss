@@ -72,6 +72,10 @@ button,
   font-weight: 300;
 }
 
+.text-small{
+  font-weight: 400;
+}
+
 .success-message,
 .error-message {
   box-sizing: border-box;
@@ -113,3 +117,4 @@ button,
 @import "./components/Features/Feature.scss";
 @import "./components/Polls/Chart.scss";
 @import "./components/Polls/Panel.scss";
+@import "./Placement.scss";

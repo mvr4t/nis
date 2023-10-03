@@ -6,7 +6,10 @@ export class User extends BaseEntity {
   id!: number;
 
   @Column({ length: 100 })
-  name!: string;
+  FirstName!: string;
+
+  @Column({ length: 50})
+  LastName!:  string;
 
   @Column({ unique: true })
   citizenshipNumber!: string;
@@ -22,4 +25,5 @@ export class User extends BaseEntity {
 
   @Column({ default: false })
   verified!: boolean;
+
 }

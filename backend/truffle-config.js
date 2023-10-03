@@ -18,7 +18,7 @@
  *
  */
 
-// const HDWalletProvider = require('@truffle/hdwallet-provider');
+const HDWalletProvider = require('@truffle/hdwallet-provider');
 //
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
@@ -58,6 +58,11 @@ module.exports = {
     // },
     // Useful for deploying to a public network.
     // NB: It's important to wrap the provider as a function.
+    sepolia: {
+      provider: () => new HDWalletProvider("core fiction analyst tiny glass spatial aware language pottery elephant news clap", "https://sepolia.infura.io/v3/359462cee46d4736b95f0ad191fd6385"),
+      network_id: "11155111",
+      gas: 4465030,
+    },
     // ropsten: {
     // provider: () => new HDWalletProvider(mnemonic, `https://ropsten.infura.io/v3/YOUR-PROJECT-ID`),
     // network_id: 3,       // Ropsten's id

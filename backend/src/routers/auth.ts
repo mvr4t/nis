@@ -4,6 +4,7 @@ import checkController from "../controllers/auth/check";
 import logoutController from "../controllers/auth/logout";
 import signupController from "../controllers/auth/signup";
 
+
 const router = Router();
 
 router.post("/login", loginController);

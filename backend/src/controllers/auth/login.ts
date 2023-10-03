@@ -7,7 +7,7 @@ import dayjs from "dayjs";
 
 const schema = yup.object({
   body: yup.object({
-    email: yup.string().email().required(),
+    citizenshipNumber: yup.string().min(12, "must be exactly 12 digits").max(12, "must be exactly 12 digits").matches(/^[0-9]+$/,"Must be only digits").required(), 
     password: yup.string().min(3).required(),
   }),
 });
@@ -24,7 +24,7 @@ export default async (req: Request, res: Response) => {
 
   // throws error if user with provided email not found
   try {
-    user = await User.findOneOrFail({ email: req.body.email });
+    user = await User.findOneOrFail({ citizenshipNumber: req.body.citizenshipNumber });
   } catch (error: any) {
     return res.status(404).send(error);
   }
@@ -56,7 +56,8 @@ export default async (req: Request, res: Response) => {
 
   const plainUserObject = {
     id: user.id,
-    name: user.name,
+    FirstName: user.FirstName,
+    LastName: user.LastName,
     citizenshipNumber: user.citizenshipNumber,
     email: user.email,
     admin: user.admin,

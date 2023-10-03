@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "../../../../testbudget/react-budget-app"
+		},
+		{
+			"path": "../.."
+		}
+	],
+	"settings": {}
+}

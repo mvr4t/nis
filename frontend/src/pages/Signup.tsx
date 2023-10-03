@@ -1,19 +1,24 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { Formik } from "formik";
-import LoginLayout from "../layouts/Login";
+import LoginLayout from "../../../../Nis/frontend/src/layouts/Login";
 import * as Yup from "yup";
 import axios from "../axios";
+import { AxiosRequestConfig } from "axios";
 
 const schema = Yup.object().shape({
-  name: Yup.string().min(3).required(),
+  FirstName: Yup.string().min(3).required(),
+  LastName: Yup.string().min(3).required(),
   email: Yup.string().email("Invalid email").required("Required"),
-  citizenshipNumber: Yup.string().min(4).required(),
+  citizenshipNumber: Yup.string().min(12, "must be exactly 12 digits").max(12, "must be exactly 12 digits").matches(/^[0-9]+$/,"Must be only digits").required(), 
   password: Yup.string().min(3).required("Required"),
   confirm: Yup.string()
     .oneOf([Yup.ref("password")], "must be same as password")
     .required(),
 });
+
+
+
 
 const Signup = (): JSX.Element => {
   const navigate = useNavigate();
@@ -27,17 +32,20 @@ const Signup = (): JSX.Element => {
         <div className="form-container">
           <Formik
             initialValues={{
-              name: "",
+              FirstName: "",
+              LastName: "",
               email: "",
               citizenshipNumber: "",
               password: "",
               confirm: "",
             }}
             validationSchema={schema}
-            onSubmit={({ name, email, citizenshipNumber, password }) => {
+            onSubmit={({ FirstName, LastName, email, citizenshipNumber, password }) => {
+              
               axios
                 .post("/auth/signup", {
-                  name,
+                  FirstName,
+                  LastName,
                   email,
                   citizenshipNumber,
                   password,
@@ -45,6 +53,7 @@ const Signup = (): JSX.Element => {
                 .then((res) => {
                   setError("");
                   setSuccess("Signup Successful!");
+                  
                 })
                 .catch((err) => {
                   let error: string = err.message;
@@ -52,19 +61,32 @@ const Signup = (): JSX.Element => {
                     error = JSON.stringify(err.response.data);
                   setError(error.slice(0, 50));
                 });
+                
             }}
           >
             {({ errors, touched, getFieldProps, handleSubmit }) => (
               <form onSubmit={handleSubmit}>
                 <div className="input-container">
                   <input
-                    id="name"
+                    id="FirstName"
                     type="text"
-                    placeholder="Name"
-                    {...getFieldProps("name")}
+                    placeholder="First Name"
+                    {...getFieldProps("FirstName")}
                   />
                   <div className="form-error-text">
-                    {touched.name && errors.name ? errors.name : null}
+                    {touched.FirstName && errors.FirstName ? errors.FirstName : null}
+                  </div>
+                </div>
+
+                <div className="input-container">
+                  <input
+                    id="LastName"
+                    type="text"
+                    placeholder="Last Name"
+                    {...getFieldProps("LastName")}
+                  />
+                  <div className="form-error-text">
+                    {touched.LastName && errors.LastName ? errors.LastName : null}
                   </div>
                 </div>
 

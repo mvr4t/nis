@@ -28,16 +28,15 @@ export default async (req: Request, res: Response) => {
   if (status !== "not-started")
     return res.status(400).send("election already started or not reset");
 
-  const accounts = await web3.eth.getAccounts();
 
   await instance.setElectionDetails(req.body.name, req.body.description, {
-    from: accounts[0],
+    from: req.body.ethereumAccount ,
   });
 
   for (let i = 0; i < req.body.candidates.length; i++) {
     const candidate = req.body.candidates[i];
     await instance.addCandidate(candidate.name, candidate.info, {
-      from: accounts[0],
+      from: req.body.ethereumAccount ,
     });
   }
 

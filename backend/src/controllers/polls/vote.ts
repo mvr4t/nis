@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import ElectionContract, { web3 } from "../../web3";
+import ElectionContract, { web3 } from "../../../../../Nis/backend/src/web3";
 // import memoryCache from "memory-cache";
 import * as yup from "yup";
 

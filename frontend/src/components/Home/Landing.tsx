@@ -9,9 +9,9 @@ const Landing = () => {
           <img src="logo.png" />
         </div>
 
-        <div className="title-large">Blockchain Based</div>
-        <div className="title-large">Voting System</div>
-        <div className="title-small">the future of voting</div>
+        <div className="title-large">NIS</div>
+        <div className="title-large">New System</div>
+        <div className="title-small">the future of school</div>
 
         <div className="button-wrapper">
           <Link to="/login">
@@ -21,11 +21,15 @@ const Landing = () => {
           <Link to="/view">
             <button>View Votes</button>
           </Link>
+
+          <Link to="/famlogin">
+            <button>Family</button>
+            </Link>
         </div>
       </div>
 
       <div className="right">
-        <img src="vote.gif" />
+        <img src="NIS.png" width="800" height ="800"/>
       </div>
     </div>
   );

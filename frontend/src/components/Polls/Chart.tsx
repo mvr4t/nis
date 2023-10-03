@@ -1,28 +1,59 @@
-import React from "react";
-import axios from "../../axios";
-
+import React, { useEffect, useState } from "react";
+import axios from "../../../../../Nis/frontend/src/axios";
+import { info } from "console";
+import {ethers} from "ethers";
+import {abi} from "../../electionabi";
 interface ChartProps {
   votes: any;
   enableVote?: boolean;
   userId?: number;
   userName?: string;
+
+}
+type Information = {
+  name: string;
+  description: string;
+  image: string;
+
 }
 
 const Chart = (props: ChartProps) => {
-  const votes = props.votes;
-
+  const votes = props.votes; 
+  const [candidateBlocks, setCandidateBlocks] = useState<Information[]>([]);  
+  useEffect(() => {
+    axios
+    .get(`/polls/candidateData`)
+    .then((res) => {
+      setCandidateBlocks(res.data.candidateBlocks)
+      console.log(res.data.candidateBlocks)
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+  }, []);
+  const address = "0x3e8c0df0909DEB486a173695869CAd077A10fe0d";
   const getButtons = () => {
     const names = [];
 
-    const vote = (candidate: string) => {
-      axios
-        .post("/polls/vote", {
-          id: props.userId?.toString(),
-          name: props.userName,
-          candidate,
-        })
-        .then((_) => window.location.reload())
-        .catch((err) => console.log({ err }));
+    async function vote(candidate: string){
+        
+          const provider = new ethers.providers.Web3Provider((window as any).ethereum);
+          await provider.send("eth_requestAccounts",[]);
+          const signer = provider.getSigner();
+          const instance = new ethers.Contract(address, abi, signer)
+          const voters: Array<any> = await instance.getVoters();
+          const candidates: Array<any> = await instance.getCandidates();
+
+          if (voters.includes(props.userId))
+            return ("already voted");
+
+          if (!candidates.includes(candidate))
+            return ("no such candidate");
+
+          await instance.vote(props.userId?.toString(), props.userName, candidate);
+
+          console.log("heeey")
+          
     };
 
     for (const name in votes) {
@@ -39,20 +70,83 @@ const Chart = (props: ChartProps) => {
 
     return names;
   };
+  const [expandedCandidate, setExpandedCandidate] = useState<string | null>(null);
+  const [clickedButton, setClickedButton] = useState<string | null>(null);
 
   const getNames = () => {
+   
+    const toggleCandidate = (name: string) => {
+      if (expandedCandidate === name) {
+        setExpandedCandidate(null);
+        setClickedButton(null); // Reset clicked state when collapsing
+      } else {
+        setExpandedCandidate(name);
+        setClickedButton(name); // Set clicked state when expanding
+      }
+    };
+  
     const names = [];
-
+  
     for (const name in votes) {
-      names.push(
-        <div key={name} className="name-wrapper text-normal">
-          {name}
-        </div>
-      );
+      const candidate = candidateBlocks.find((candidate) => candidate.name === name);
+  
+      if (candidate) {
+        const isExpanded = expandedCandidate === name;
+  
+        names.push(
+          <div key={name} className="name-wrapper text-normal">
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <div>{name}</div>
+              <button
+                className={clickedButton === name ? "clicked-button" : "default-button"}
+                style={{ marginLeft: "10px" }}
+                onClick={() => toggleCandidate(name)}
+              >
+                {isExpanded ? "▲" : "▼"}
+              </button>
+            </div>
+            {isExpanded && (
+             
+               <div className="flip-card">
+               <div className="flip-card-inner">
+                   <div className="flip-card-front">
+                       <p className="title" style={{marginTop: "20px"}}>Candidate Description</p>
+                       <p style={{marginBottom: "180px"}}>{candidate.description}</p>
+                   </div>
+                   <div className="flip-card-back">
+                       <p className="title">Photo</p>
+                       <img
+                          src={`/uploads/${candidate.image}`}
+                          alt={candidate.name}
+                         style={{ maxWidth: "150px", maxHeight: "300px", marginLeft: "20px", marginBottom: "30px"}}
+                        />
+                   </div>
+               </div>
+           </div>
+            )}
+          </div>
+        );
+      }
     }
-
+  
     return names;
   };
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
 
   const getTotal = () => {
     let total = 0;
@@ -95,10 +189,14 @@ const Chart = (props: ChartProps) => {
     return bars;
   };
 
+ 
+
   return (
     <div>
       <div className="bars-container">{getBars()}</div>
       <div className="names-wrapper">{getNames()}</div>
+
+     
 
       {props.enableVote ? (
         <div className="buttons-wrapper">{getButtons()}</div>

@@ -1,9 +1,9 @@
 {
   "type": "mysql",
-  "host": "localhost",
+  "host": "mysqlnis.c3er9wdwkcic.eu-north-1.rds.amazonaws.com",
   "port": 3306,
   "username": "bbvs",
-  "password": "Password$$",
+  "password": "mrcrown1234",
   "database": "bbvs",
   "synchronize": false,
   "logging": true,

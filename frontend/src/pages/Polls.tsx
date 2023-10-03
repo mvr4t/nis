@@ -6,7 +6,7 @@ import axios from "../axios";
 const Polls = () => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState({ name: "", description: "", votes: {} });
-
+  const [candidatesInfo, setCandidatesInfo] = useState({});
   useEffect(() => {
     axios
       .get("/polls/")
@@ -15,14 +15,17 @@ const Polls = () => {
         setLoading(false);
       })
       .catch((err) => console.log({ err }));
+     
   }, []);
 
   if (loading) return <div></div>;
 
   return (
     <Panel name={data.name} description={data.description}>
-      <Chart votes={data.votes} />
+      <Chart votes={data.votes} />   
     </Panel>
+     
+
   );
 };
 

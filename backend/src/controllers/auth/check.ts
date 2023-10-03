@@ -27,9 +27,13 @@ export default async (req: Request, res: Response) => {
     const user: any = jwt.verify(refreshToken, refreshTokenSecret);
 
     const userPlainObj = {
+      Fam_ID: user.Fam_ID,
       id: user.id,
-      name: user.name,
-      phone: user.phone,
+      FirstName: user.FirstName,
+      LastName: user.LastName,
+      Login: user.Login,
+      Role: user.Role,
+      citizenshipNumber: user.citizenshipNumber,
       email: user.email,
       admin: user.admin,
     };

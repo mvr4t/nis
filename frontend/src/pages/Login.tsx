@@ -2,13 +2,13 @@ import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router";
 import { Formik } from "formik";
 import { RouteProps } from "react-router";
-import LoginLayout from "../layouts/Login";
+import LoginLayout from "../../../../Nis/frontend/src/layouts/Login";
 import * as Yup from "yup";
 import axios from "../axios";
 import { AuthContext } from "../contexts/Auth";
 
 const schema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Required"),
+  citizenshipNumber: Yup.string().min(12, "must be exactly 12 digits").max(12, "must be exactly 12 digits").matches(/^[0-9]+$/,"Must be only digits").required(), 
   password: Yup.string().min(3).required("Required"),
 });
 
@@ -24,7 +24,7 @@ const Login = (props: RouteProps): JSX.Element => {
         <div className="form-container">
           <Formik
             initialValues={{
-              email: "",
+              citizenshipNumber: "",
               password: "",
             }}
             validationSchema={schema}
@@ -46,13 +46,13 @@ const Login = (props: RouteProps): JSX.Element => {
               <form onSubmit={handleSubmit}>
                 <div className="input-container">
                   <input
-                    id="email"
-                    type="email"
-                    placeholder="Email"
-                    {...getFieldProps("email")}
+                    id="citizenshipNumber"
+                    type="text"
+                    placeholder="Individual Identification Number"
+                    {...getFieldProps("citizenshipNumber")}
                   />
                   <div className="form-error-text">
-                    {touched.email && errors.email ? errors.email : null}
+                    {touched.citizenshipNumber && errors.citizenshipNumber ? errors.citizenshipNumber : null}
                   </div>
                 </div>
 

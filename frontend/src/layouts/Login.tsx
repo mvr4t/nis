@@ -5,7 +5,7 @@ import BackButton from "../components/Back";
 interface LayoutProps {
   error: string;
   success?: string;
-  children: JSX.Element;
+  children: JSX.Element|JSX.Element[];
 }
 
 const Login = (props: LayoutProps) => {
@@ -16,9 +16,9 @@ const Login = (props: LayoutProps) => {
       <div className="left">
         <BackButton call={() => navigate("/")} />
 
-        <div className="title-large title-green">Blockchain Based</div>
-        <div className="title-large title-green">Voting System</div>
-        <div className="title-small">the future of voting</div>
+        <div className="title-large title-green">NIS</div>
+        <div className="title-large title-green">Sign in</div>
+        <div className="title-small">the future of school</div>
       </div>
 
       <div className="right">

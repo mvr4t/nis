@@ -1,16 +1,32 @@
 import { Request, Response } from "express";
-import ElectionContract, { web3 } from "../../web3";
+import { getRepository } from "typeorm";
+import {Information} from "../../entity/Information"; 
+import fs from 'fs';
+import path from 'path';
+
 
 export default async (_: Request, res: Response) => {
-  const accounts = await web3.eth.getAccounts();
-  const instance = await ElectionContract.deployed();
 
-  const status = await instance.getStatus();
 
-  if (status !== "finished")
-    return res.status(400).send("election not finished or already reset");
+  const informationRepository = getRepository(Information);
+  await informationRepository.clear();
 
-  await instance.resetElection({ from: accounts[0] });
+  const uploadFolderPath = path.join(__dirname, "..", "..", "upload");
+  fs.readdir(uploadFolderPath, (err, files) => {
+    if (err) {
+      console.error("Error reading upload folder:", err);
+      return res.status(500).send("Error deleting images");
+    }
+
+    files.forEach((file) => {
+      fs.unlink(path.join(uploadFolderPath, file), (err) => {
+        if (err) {
+          console.error("Error deleting file:", err);
+        }
+      });
+    });
+  });
+
 
   return res.send("successful");
 };

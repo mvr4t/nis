@@ -33,7 +33,6 @@ const User = () => {
     if (voteState !== "checking") {
       axios.get("/polls/").then((res) => {
         setData(res.data);
-        console.log(res);
         setLoading(false);
       });
 
@@ -60,8 +59,9 @@ const User = () => {
         <Chart
           enableVote={votable === "not-voted"}
           userId={authContext.id}
-          userName={authContext.name}
+          userName={authContext.FirstName}
           votes={data.votes}
+          
         />
       </>
     </Panel>
