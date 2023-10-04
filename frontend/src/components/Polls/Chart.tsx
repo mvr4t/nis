@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "../../../../../Nis/frontend/src/axios";
+import axios from "axios";
 import { info } from "console";
 import {ethers} from "ethers";
 import {abi} from "../../electionabi";

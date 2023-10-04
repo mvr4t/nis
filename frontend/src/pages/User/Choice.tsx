@@ -4,7 +4,7 @@ import React from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import axioss from "../../axios";
-import Info from "../../../../../Nis/frontend/src/layouts/information";
+import Info from "../../layouts/information";
 import { AuthContext } from "../../contexts/Auth";
 import axios, {AxiosRequestConfig} from 'axios';
 

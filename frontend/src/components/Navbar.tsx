@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router";
-import { AuthContext } from "../../../../Nis/frontend/src/contexts/Auth";
+import { AuthContext } from "../contexts/Auth";
 
 type NavbarContainerProps = {
   children: JSX.Element;

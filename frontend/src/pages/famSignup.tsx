@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import Select from 'react-select';
 import { Formik } from "formik";
-import LoginLayout from "../../../../Nis/frontend/src/layouts/Login";
+import LoginLayout from "../layouts/Login";
 import * as Yup from "yup";
 import axios from "../axios";
 import { AxiosRequestConfig } from "axios";

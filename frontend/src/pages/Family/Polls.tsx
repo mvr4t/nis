@@ -5,7 +5,6 @@ import FamPanel from "../../components/Polls/Fampanel";
 import FamWaiting from "../../components/Famwaiting";
 import FamRunning from "../../components/Polls/Famrunning";
 import FamFinished from "../../components/Polls/Famfinished";
-import ElectionContract, { web3 } from "../../../../../Nis/backend/src/web3";
 import {ethers} from 'ethers';
 import {abi} from '../../electionabi';
 import { AuthContext } from "../../contexts/Auth";

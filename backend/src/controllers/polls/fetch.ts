@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import ElectionContract from "../../../../../Nis/backend/src/web3";
+import ElectionContract from "../../web3";
 
 export default async (req: Request, res: Response) => {
   const instance = await ElectionContract.deployed();

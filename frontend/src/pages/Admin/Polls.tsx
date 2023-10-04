@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "../../axios";
 import Chart from "../../components/Polls/Chart";
 import Panel from "../../components/Polls/Panel";
-import ElectionContract, { web3 } from "../../../../../Nis/backend/src/web3";
 import {ethers} from 'ethers';
 import {abi} from '../../electionabi';
 const Polls = () => {
