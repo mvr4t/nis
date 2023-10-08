@@ -3,8 +3,8 @@ import ElectionContract from "../..//web3";
 
 export default async (_: Request, res: Response) => {
   const instance = await ElectionContract.deployed();
-
+  const contractAddress = instance.address;
   const status = await instance.getStatus();
 
-  return res.send({ status });
+  return res.send({ status, contractAddress });
 };

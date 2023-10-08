@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState}from "react";
 import axios from "../../axios";
 import {ethers} from "ethers";
 import {abi} from "../../electionabi";
@@ -12,8 +12,19 @@ interface ChartProps {
 
 const Chart = (props: ChartProps) => {
   const votes = props.votes;
-  const address = "0x3e8c0df0909DEB486a173695869CAd077A10fe0d";
-
+  const [address, setAddress] = useState<string>(" ");
+  useEffect(() => {
+    axios
+    .get(`/polls/status`)
+    .then((res) => {
+      setAddress(res.data.contractAddress)
+      console.log(res.data.contractAddress)
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+    
+  }, []);
   const getButtons = () => {
     const names = [];
 

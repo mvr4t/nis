@@ -19,11 +19,13 @@ export default async (_: Request, res: Response) => {
     }
 
     files.forEach((file) => {
-      fs.unlink(path.join(uploadFolderPath, file), (err) => {
-        if (err) {
-          console.error("Error deleting file:", err);
-        }
-      });
+      if (file !== '.gitkeep') {
+        fs.unlink(path.join(uploadFolderPath, file), (err) => {
+          if (err) {
+            console.error("Error deleting file:", err);
+          }
+        });
+      }
     });
   });
 

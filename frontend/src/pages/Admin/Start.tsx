@@ -24,6 +24,7 @@ const Start = () => {
   const [descriptions, setDescription] = useState<string>("");
   const [pollnames, setPollname] = useState<string>("");
   const candidateImageInputRef = useRef<HTMLInputElement | null>(null);
+  const [address, setAddress] = useState<string>(" ");
 
 
   const candidateField = useRef<HTMLInputElement>(null);
@@ -36,6 +37,15 @@ const Start = () => {
       //check if Metamask wallet is installed
       setIsMetamaskInstalled(true);
     }
+    axios
+    .get(`/polls/status`)
+    .then((res) => {
+      setAddress(res.data.contractAddress)
+      console.log(res.data.contractAddress)
+    })
+    .catch((err) => {
+      console.error(err);
+    });
   },[]);
 
   async function connectMetamaskWallet(): Promise<void> {
@@ -68,7 +78,6 @@ const Start = () => {
     );
   }
 
-  const address = "0x3e8c0df0909DEB486a173695869CAd077A10fe0d";
       async function setElectionDetails(){
         try{
         const provider = new ethers.providers.Web3Provider((window as any).ethereum);

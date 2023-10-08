@@ -14,6 +14,7 @@ const Polls = () => {
   const [voteState, setVoteStatus] = useState<
   "finished" | "running" | "not-started" | "checking"
 >("checking");
+const [address, setAddress] = useState<string>(" ");
 
 const [votable, setVotable] = useState("");
   
@@ -23,9 +24,17 @@ const [votable, setVotable] = useState("");
       setData(res.data);
       setLoading(false);
     });
+    axios
+    .get(`/polls/status`)
+    .then((res) => {
+      setAddress(res.data.contractAddress)
+      console.log(res.data.contractAddress)
+    })
+    .catch((err) => {
+      console.error(err);
+    });
     
   }, []);
-  const address = "0x3e8c0df0909DEB486a173695869CAd077A10fe0d";
   const authContext = useContext(AuthContext);
   async function endElection() {
     try{

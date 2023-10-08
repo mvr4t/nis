@@ -7,14 +7,23 @@ import {abi} from '../../electionabi';
 const Result = () => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState({ name: "", description: "", votes: {} });
+  const [address, setAddress] = useState<string>(" ");
 
   useEffect(() => {
     axios.get("/polls/").then((res) => {
       setData(res.data);
       setLoading(false);
     });
+    axios
+    .get(`/polls/status`)
+    .then((res) => {
+      setAddress(res.data.contractAddress)
+      console.log(res.data.contractAddress)
+    })
+    .catch((err) => {
+      console.error(err);
+    });
   }, []);
-  const address = "0x3e8c0df0909DEB486a173695869CAd077A10fe0d";
   async function resetElection() {
     try {
       // Perform the axios request

@@ -30,6 +30,7 @@ const Start = () => {
   const [isMetamaskInstalled, setIsMetamaskInstalled] = useState<boolean>(false);
   const [ethereumAccount, setEthereumAccount] = useState<string | null>(null);
   const prefix = fixedlogin.split('_')[0];
+  const [address, setAddress] = useState<string>(" ");
 
   useEffect(() => {
     if((window as any).ethereum){
@@ -46,6 +47,15 @@ const Start = () => {
     })
     .catch((err) => {
       console.log(err);
+    });
+    axios
+    .get(`/polls/status`)
+    .then((res) => {
+      setAddress(res.data.contractAddress)
+      console.log(res.data.contractAddress)
+    })
+    .catch((err) => {
+      console.error(err);
     });
   },[]);
 
@@ -79,7 +89,6 @@ const Start = () => {
     );
   }
 
-  const address = "0x3e8c0df0909DEB486a173695869CAd077A10fe0d";
       async function setElectionDetails(){
         try{
         const provider = new ethers.providers.Web3Provider((window as any).ethereum);
