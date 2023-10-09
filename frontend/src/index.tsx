@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { BudgetsProvider } from "../../../Nis/frontend/src/contexts/BudgetsContext";
+import { BudgetsProvider } from "../src/contexts/BudgetsContext";
 
 ReactDOM.render(
   <React.StrictMode>
