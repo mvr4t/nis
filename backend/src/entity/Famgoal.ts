@@ -1,6 +1,5 @@
 import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { StringLocale } from "yup/lib/locale";
-
 @Entity()
 export class Famgoal extends BaseEntity {
   @PrimaryGeneratedColumn()

@@ -26,7 +26,8 @@
     "truffle-hdwallet-provider": "^1.0.17",
     "typeorm": "^0.2.41",
     "web3": "^1.10.2",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "crypto": "1.0.1"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
