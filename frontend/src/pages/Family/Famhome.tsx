@@ -4,7 +4,7 @@ import { useBudgets } from "../../contexts/BudgetsContext";
 import BudgetCard from "../../components/BudgetCard";
 import AddExpenseModal from "../../components/AddExpenseModal";
 import { AuthContext } from "../../contexts/Auth";
-import axios from "axios";
+import axios from "../../axios";
 
 interface Budget {
   id: number;

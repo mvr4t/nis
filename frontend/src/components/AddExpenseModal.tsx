@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Form, Modal, Button } from "react-bootstrap";
-import axios from "axios";
+import axios from "../axios";
 import { AuthContext } from "../contexts/Auth";
 
 interface AddExpenseModalProps {
