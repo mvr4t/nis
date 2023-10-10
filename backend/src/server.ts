@@ -24,7 +24,7 @@ app.use("/uploads", express.static(path.join(__dirname,"upload")));
 
 app.get("/", (req: Request, res: Response) => {
   console.log(req.cookies);
-  res.status(404).send("no link matched!");
+  res.status(404).send("<h1>Hi there</h1>");
 });
 
 
