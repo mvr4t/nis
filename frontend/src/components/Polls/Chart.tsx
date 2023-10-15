@@ -125,7 +125,7 @@ const Chart = (props: ChartProps) => {
                    <div className="flip-card-back">
                        <p className="title">Photo</p>
                        <img
-                          src={`https://fleet-root-production.up.railway.app/uploads/${candidate.image}`}
+                          src={`/uploads/${candidate.image}`}
                           alt={candidate.name}
                          style={{ maxWidth: "150px", maxHeight: "300px", marginLeft: "20px", marginBottom: "30px"}}
                         />
