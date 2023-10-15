@@ -4,8 +4,7 @@ import dayjs from "dayjs";
 
 export default async (req: Request, res: Response) => {
   const refreshToken = req.cookies.refreshToken;
-
-  if (!refreshToken) return res.status(400).send("not authenticated");
+  if (!refreshToken)  return res.status(400).send("not authenticated");
 
   try {
     const accessTokenSecret = process.env.ACCESS_TOKEN_SECRET;
@@ -39,7 +38,7 @@ export default async (req: Request, res: Response) => {
     };
 
     const accessToken = jwt.sign(userPlainObj, accessTokenSecret, {
-      expiresIn: 60, // 10 minutes
+      expiresIn: 120, // 10 minutes
     });
 
     const newRefreshToken = jwt.sign(userPlainObj, refreshTokenSecret, {
@@ -49,6 +48,7 @@ export default async (req: Request, res: Response) => {
     res.cookie("refresh", newRefreshToken, {
       secure: true,
       httpOnly: true,
+      sameSite: "none",
       expires: dayjs().add(7, "days").toDate(),
     });
 

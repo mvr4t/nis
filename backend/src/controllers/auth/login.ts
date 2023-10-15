@@ -63,13 +63,16 @@ export default async (req: Request, res: Response) => {
     admin: user.admin,
   };
   const accessToken = jwt.sign(plainUserObject, accessTokenSecret, {
-    expiresIn: 60,
+    expiresIn: 120,
   });
   const refreshToken = jwt.sign(plainUserObject, refreshTokenSecret, {
     expiresIn: "7d",
   });
 
   res.cookie("refreshToken", refreshToken, {
+    secure: true,
+    httpOnly: true,
+    sameSite: "none",
     expires: dayjs().add(7, "days").toDate(),
   });
 

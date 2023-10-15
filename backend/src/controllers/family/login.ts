@@ -71,6 +71,9 @@ export default async (req: Request, res: Response) => {
   });
 
   res.cookie("refreshToken", refreshToken, {
+    secure: true,
+    httpOnly: true,
+    sameSite: "none",
     expires: dayjs().add(7, "days").toDate(),
   });
 

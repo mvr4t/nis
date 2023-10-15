@@ -69,7 +69,7 @@ export default (props: ContextProps): JSX.Element => {
   useEffect(() => {
     checkAuthentication();
 
-    const interval = setInterval(checkAuthentication, 5 * 1000);
+    const interval = setInterval(checkAuthentication, 10 * 1000);
 
     return () => clearInterval(interval);
   }, []);

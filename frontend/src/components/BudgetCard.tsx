@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext}from "react";
 import { Button, Card, ProgressBar, Stack } from "react-bootstrap";
 import { currencyFormatter } from "../utils";
-import axios from "axios";
+import axios from "../axios";
 import { AuthContext } from "../contexts/Auth";
 interface BudgetCardProps {
   name: string;
