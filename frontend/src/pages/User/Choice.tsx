@@ -80,7 +80,7 @@ const Curator = (): JSX.Element => {
         maxBodyLength: Infinity,
         url: `https://api.chatengine.io/chats/${chatId}/people/`,
         headers: {
-            'Project-ID': "ebf810db-a728-45d2-bb20-894fcae82e5f", 
+            'Project-ID': "7e04c025-3a86-4ae7-9581-1925e7538f28", 
             'User-Name': "Admin", 
             'User-Secret': "john@gmail.com"
         },
@@ -247,9 +247,9 @@ const Curator = (): JSX.Element => {
     }
    console.log(selectedGrade?.label);
     if (selection?.label === "Assel Seidulaevna" && selectedGrade?.label === "12") {
-      setChatId(206881);
+      setChatId(209462);
     } else if (selection?.label === "Dina Nurlankyzy" && selectedGrade?.label === "12") {
-      setChatId(206932);
+      setChatId(209463);
     } else {
       setChatId(null);
     }

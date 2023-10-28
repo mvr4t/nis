@@ -91,7 +91,7 @@ if (loading || voteState === "checking") return <div></div>;
 if (voteState === "not-started") return <FamWaiting />;
   return (
     <>
-    {authContext.Role === "Father" ? (
+    {authContext.Role === "Father" || authContext.Role === "Mother"?  (
       <FamPanel name={data.name} description={data.description}>
         <>
         {voteState === "running" ? <FamRunning /> : <FamFinished />}

@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "../../axios";
 import FamChart from "../../components/Polls/Famchart";
 import FamPanel from "../../components/Polls/Fampanel";
 import {ethers} from 'ethers';
 import {abi} from '../../electionabi';
+import { AuthContext } from "../../contexts/Auth";
 const Result = () => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState({ name: "", description: "", votes: {} });
   const [address, setAddress] = useState<string>(" ");
+  const authContext = useContext(AuthContext);
+  const fixedlogin = authContext.Login;
+  const prefix = fixedlogin.split('_')[0];
 
   useEffect(() => {
     axios.get("/polls/").then((res) => {
@@ -27,7 +31,7 @@ const Result = () => {
   async function resetElection() {
     try {
       // Perform the axios request
-      axios.post("/polls/reset");
+      axios.post(`/polls/reset?Login=${prefix}`);
   
       // Ethereum interactions
       const provider = new ethers.providers.Web3Provider((window as any).ethereum);

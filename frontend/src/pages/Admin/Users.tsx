@@ -38,7 +38,7 @@ const Users = () => {
           maxBodyLength: Infinity,
           url: 'https://api.chatengine.io/users/',
           headers: {
-            'PRIVATE-KEY': '275fd6d0-14fd-4e7a-b044-37cdf5e2518d', // Replace with your Chat Engine private key
+            'PRIVATE-KEY': '670fcd94-ce4d-4ae4-8133-8943ce623e09', // Replace with your Chat Engine private key
           },
           data: data,
         }; 
@@ -80,7 +80,12 @@ const Users = () => {
     setUser(newList);
   };
 
-  if (users.length === 0) return <div></div>;
+  if (users.length === 0) return (
+    <div className = "users-wrapper">
+      <div className = "user-wrapper" style={{fontSize: "20px"}}> 
+        No user available yet.
+        </div>
+    </div>);
 
   return (
     <div className="users-wrapper">

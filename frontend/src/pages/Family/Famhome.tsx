@@ -36,8 +36,13 @@ function Famhome() {
         setError(null); // Clear any previous errors on success
       })
       .catch((err) => {
+        if(budget.length === 0){
+          setError("No goals are written.");
+        }
+        else{
         console.error("Error fetching tasks:", err);
-        setError("An error occurred while fetching data."); // Set an error message
+        setError("An error occurred while fetching data."); 
+        }// Set an error message
       });
   };
 

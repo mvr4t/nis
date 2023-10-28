@@ -6,7 +6,7 @@ import { ChatSettings, ChatFeed } from 'react-chat-engine-advanced';
 const Chat = (): JSX.Element => {
   const authContext = useContext(AuthContext);
 
-  const projectID: string = "ebf810db-a728-45d2-bb20-894fcae82e5f";
+  const projectID: string = "7e04c025-3a86-4ae7-9581-1925e7538f28";
   const username = authContext.FirstName.toString();
   const secret = authContext.email.toString();
 
