@@ -1,10 +1,10 @@
 {
   "type": "mysql",
-  "host": "mysqlnis.c3er9wdwkcic.eu-north-1.rds.amazonaws.com",
+  "host": "mysql://root:uVGqyHRMTMIJZdpTvUewlsluHRERLOOc@junction.proxy.rlwy.net:25868/railway",
   "port": 3306,
-  "username": "bbvs",
-  "password": "mrcrown1234",
-  "database": "bbvs",
+  "username": "root",
+  "password": "uVGqyHRMTMIJZdpTvUewlsluHRERLOOc",
+  "database": "railway",
   "synchronize": false,
   "logging": true,
   "cli": {
